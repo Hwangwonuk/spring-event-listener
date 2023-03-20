@@ -26,6 +26,7 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -68,4 +69,24 @@ public class Wallet {
   @ToString.Exclude
   private List<WalletLog> walletLogs = new ArrayList<>();
   // ============== child ==============
+
+  /**
+   * static {@code Wallet} constructor.
+   *
+   * @param companyId 회사 아이디
+   * @param cash 현금
+   * @param point 포인트
+   * @return {@code Wallet} instance.
+   */
+  public static Wallet create(
+      @NonNull String companyId,
+      @NonNull BigDecimal cash,
+      @NonNull BigDecimal point) {
+    Wallet wallet = new Wallet();
+    wallet.companyId = companyId;
+    wallet.cash = cash;
+    wallet.point = point;
+
+    return wallet;
+  }
 }
