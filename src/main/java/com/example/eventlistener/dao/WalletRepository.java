@@ -10,6 +10,7 @@
 package com.example.eventlistener.dao;
 
 import com.example.eventlistener.model.Wallet;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -25,4 +26,28 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface WalletRepository extends JpaRepository<Wallet, Long> {
 
+  /**
+   * <pre>
+   * find by companyId.
+   * companyId is unique in wallet.
+   *
+   * Must return single row.
+   * Locally it does not return null or multiple row.
+   * </pre>
+   *
+   * @param companyId
+   * @return {@code Wallet} instance.
+   */
+  Optional<Wallet> findByCompanyId(String companyId);
+
+  /**
+   * Company Id로 Wallet 조회
+   * @param companyId 회사 ID
+   * @return Wallet Entity
+   * @throws
+   */
+  default Wallet findWalletByCompanyIdOrElseThrow(String companyId) {
+    return findByCompanyId(companyId)
+        .orElseThrow(() -> new RuntimeException("Wallet is not found by " + companyId));
+  }
 }

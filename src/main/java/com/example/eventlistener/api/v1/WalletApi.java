@@ -16,6 +16,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,5 +57,17 @@ public class WalletApi {
     log.info("created wallet : {}", walletResponse);
 
     return walletResponse;
+  }
+
+  /**
+   * company ID로 wallet을 조회
+   * @param companyId 회사 ID
+   * @return WalletResponse;
+   */
+  @GetMapping("/{application}")
+  public WalletResponse getWallet(@PathVariable String companyId) {
+    log.info("wallet applicationId : {}", companyId);
+    WalletResponse wallet = walletService.findWalletByCompanyId(companyId);
+    return wallet;
   }
 }

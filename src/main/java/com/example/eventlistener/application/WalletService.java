@@ -55,4 +55,14 @@ public class WalletService {
     return new WalletResponse(savedWallet);
   }
 
+  /**
+   * 어플리케이션 ID로 wallet을 조회
+   * @param companyId 어플리케이션 ID
+   * @return WalletResponse
+   */
+  public WalletResponse findWalletByCompanyId(String companyId) {
+    Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
+    return new WalletResponse(wallet);
+  }
+
 }
