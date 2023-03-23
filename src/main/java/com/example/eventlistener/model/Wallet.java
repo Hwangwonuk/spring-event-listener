@@ -11,6 +11,7 @@ package com.example.eventlistener.model;
 
 import static jakarta.persistence.FetchType.LAZY;
 
+import com.example.eventlistener.dto.WalletChargeRequest;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -89,4 +90,53 @@ public class Wallet {
 
     return wallet;
   }
+
+  /**
+   * 해당 CreditType 에 맞게 금액을 충전한다.
+   *
+   * @param request
+   */
+  public void charge(@NonNull WalletChargeRequest request) {
+    CreditType creditType = request.getCreditType();
+    BigDecimal charge = request.getAmount();
+
+    BigDecimal balance = getBalance(creditType);
+    setBalance(creditType, balance.add(charge));
+
+    if (charge.compareTo(BigDecimal.ZERO) > 0) {
+//  TODO: WalletLog List add 필요.
+    }
+  }
+
+  /**
+   * 입력받은 credit type의 잔액을 조회한다.
+   * @param creditType {@link CreditType}
+   * @return 잔액.
+   */
+  private BigDecimal getBalance(CreditType creditType) {
+    if (creditType == CreditType.POINT) {
+      return this.point;
+    } else {
+      return this.cash;
+    }
+  }
+
+  /**
+   * credit type의 잔액을 변경한다.
+   * @param creditType {@link CreditType}
+   * @param balance creditType의 잔액
+   */
+  private void setBalance(CreditType creditType, BigDecimal balance) {
+    if(balance.compareTo(BigDecimal.ZERO) < 0) {
+      //TODO: throw 처리 필요.
+    }
+
+    if (creditType == CreditType.POINT) {
+      this.point = balance;
+    } else {
+      this.cash = balance;
+    }
+
+  }
+
 }

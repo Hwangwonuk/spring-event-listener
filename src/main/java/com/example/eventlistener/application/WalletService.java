@@ -10,6 +10,7 @@
 package com.example.eventlistener.application;
 
 import com.example.eventlistener.dao.WalletRepository;
+import com.example.eventlistener.dto.WalletChargeRequest;
 import com.example.eventlistener.dto.WalletCreationRequest;
 import com.example.eventlistener.dto.WalletResponse;
 import com.example.eventlistener.model.Wallet;
@@ -56,12 +57,27 @@ public class WalletService {
   }
 
   /**
-   * 어플리케이션 ID로 wallet을 조회
-   * @param companyId 어플리케이션 ID
+   * 회사 ID로 wallet을 조회
+   * @param companyId 회사 ID
    * @return WalletResponse
    */
   public WalletResponse findWalletByCompanyId(String companyId) {
     Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
+    return new WalletResponse(wallet);
+  }
+
+  /**
+   * charge credit.
+   *   - cash
+   *   - point
+   *
+   * @param request {@link WalletChargeRequest}
+   */
+  @Transactional
+  public WalletResponse charge(@NonNull WalletChargeRequest request) {
+    Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(request.getCompanyId());
+    wallet.charge(request);
+
     return new WalletResponse(wallet);
   }
 

@@ -10,6 +10,7 @@
 package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletService;
+import com.example.eventlistener.dto.WalletChargeRequest;
 import com.example.eventlistener.dto.WalletCreationRequest;
 import com.example.eventlistener.dto.WalletResponse;
 import jakarta.validation.Valid;
@@ -67,7 +68,21 @@ public class WalletApi {
   @GetMapping("/{application}")
   public WalletResponse getWallet(@PathVariable String companyId) {
     log.info("wallet applicationId : {}", companyId);
-    WalletResponse wallet = walletService.findWalletByCompanyId(companyId);
-    return wallet;
+    WalletResponse walletResponse = walletService.findWalletByCompanyId(companyId);
+    return walletResponse;
   }
+
+  /**
+   * charge point(credit).
+   *
+   * @param chargeRequest
+   * @return
+   */
+  @PostMapping("/charge")
+  public WalletResponse charge(@Valid @RequestBody WalletChargeRequest chargeRequest) {
+    log.info("chargeRequest : {}", chargeRequest);
+    final WalletResponse walletResponse = walletService.charge(chargeRequest);
+    return walletResponse;
+  }
+
 }
