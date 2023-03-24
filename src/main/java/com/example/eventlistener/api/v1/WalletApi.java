@@ -10,6 +10,7 @@
 package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletService;
+import com.example.eventlistener.dto.RefundRequest;
 import com.example.eventlistener.dto.WalletChargeRequest;
 import com.example.eventlistener.dto.WalletCreationRequest;
 import com.example.eventlistener.dto.WalletResponse;
@@ -85,6 +86,15 @@ public class WalletApi {
     return walletResponse;
   }
 
-
+  /**
+   * 환불 하다.
+   * @param refundDto
+   * @return
+   */
+  @PostMapping("/refund")
+  public RefundRequest refund(@Valid @RequestBody RefundRequest refundDto) {
+    log.info("refund data : {}", refundDto);
+    return refundDto;
+  }
 
 }
