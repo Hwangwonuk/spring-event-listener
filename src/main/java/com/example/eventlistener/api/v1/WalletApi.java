@@ -65,9 +65,9 @@ public class WalletApi {
    * @param companyId 회사 ID
    * @return WalletResponse;
    */
-  @GetMapping("/{application}")
+  @GetMapping("/{companyId}")
   public WalletResponse getWallet(@PathVariable String companyId) {
-    log.info("wallet applicationId : {}", companyId);
+    log.info("wallet companyId : {}", companyId);
     WalletResponse walletResponse = walletService.findWalletByCompanyId(companyId);
     return walletResponse;
   }
@@ -84,5 +84,7 @@ public class WalletApi {
     final WalletResponse walletResponse = walletService.charge(chargeRequest);
     return walletResponse;
   }
+
+
 
 }
