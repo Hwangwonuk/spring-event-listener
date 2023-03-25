@@ -11,6 +11,7 @@ package com.example.eventlistener.application;
 
 import com.example.eventlistener.dao.WalletRepository;
 import com.example.eventlistener.dto.WalletChargeRequest;
+import com.example.eventlistener.dto.WalletCreationDto;
 import com.example.eventlistener.dto.WalletCreationRequest;
 import com.example.eventlistener.dto.WalletResponse;
 import com.example.eventlistener.model.Wallet;
@@ -47,12 +48,12 @@ public class WalletService {
   /**
    * <p> create wallet.</p>
    *
-   * @param request wallet essential data to create wallet.
+   * @param walletCreationDto wallet essential data to create wallet.
    * @return saved Wallet info.
    */
   @Transactional
-  public WalletResponse create(@NonNull WalletCreationRequest request) {
-    Wallet savedWallet = walletRepository.save(request.toEntity());
+  public WalletResponse create(@NonNull WalletCreationDto walletCreationDto) {
+    Wallet savedWallet = walletRepository.save(walletCreationDto.toEntity());
     return new WalletResponse(savedWallet);
   }
 

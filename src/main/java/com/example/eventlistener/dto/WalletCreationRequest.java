@@ -9,7 +9,6 @@
  */
 package com.example.eventlistener.dto;
 
-import com.example.eventlistener.model.Wallet;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -58,11 +57,4 @@ public class WalletCreationRequest {
   @JsonProperty("point")
   private BigDecimal point;
 
-  public Wallet toEntity() {
-    return Wallet.create(
-        this.companyId,
-        this.cash,
-        this.point
-    );
-  }
 }

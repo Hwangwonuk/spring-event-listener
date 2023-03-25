@@ -12,6 +12,7 @@ package com.example.eventlistener.api.v1;
 import com.example.eventlistener.application.WalletService;
 import com.example.eventlistener.dto.RefundRequest;
 import com.example.eventlistener.dto.WalletChargeRequest;
+import com.example.eventlistener.dto.WalletCreationDto;
 import com.example.eventlistener.dto.WalletCreationRequest;
 import com.example.eventlistener.dto.WalletResponse;
 import jakarta.validation.Valid;
@@ -55,7 +56,7 @@ public class WalletApi {
    */
   @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
   public WalletResponse create(@Valid @RequestBody WalletCreationRequest request) {
-    WalletResponse walletResponse = walletService.create(request);
+    final WalletResponse walletResponse = walletService.create(WalletCreationDto.from(request));
     log.info("created wallet : {}", walletResponse);
 
     return walletResponse;
@@ -69,7 +70,7 @@ public class WalletApi {
   @GetMapping("/{companyId}")
   public WalletResponse getWallet(@PathVariable String companyId) {
     log.info("wallet companyId : {}", companyId);
-    WalletResponse walletResponse = walletService.findWalletByCompanyId(companyId);
+    final WalletResponse walletResponse = walletService.findWalletByCompanyId(companyId);
     return walletResponse;
   }
 
@@ -92,9 +93,9 @@ public class WalletApi {
    * @return
    */
   @PostMapping("/refund")
-  public RefundRequest refund(@Valid @RequestBody RefundRequest refundDto) {
+  public WalletResponse refund(@Valid @RequestBody RefundRequest refundDto) {
     log.info("refund data : {}", refundDto);
-    return refundDto;
+    return null;
   }
 
 }
