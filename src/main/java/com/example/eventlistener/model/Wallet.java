@@ -11,6 +11,7 @@ package com.example.eventlistener.model;
 
 import static jakarta.persistence.FetchType.LAZY;
 
+import com.example.eventlistener.dto.WalletChargeDto;
 import com.example.eventlistener.dto.WalletChargeRequest;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -94,11 +95,11 @@ public class Wallet {
   /**
    * 해당 CreditType 에 맞게 금액을 충전한다.
    *
-   * @param request
+   * @param walletChargeDto
    */
-  public void charge(@NonNull WalletChargeRequest request) {
-    CreditType creditType = request.getCreditType();
-    BigDecimal charge = request.getAmount();
+  public void charge(@NonNull WalletChargeDto walletChargeDto) {
+    CreditType creditType = walletChargeDto.getCreditType();
+    BigDecimal charge = walletChargeDto.getAmount();
 
     BigDecimal balance = getBalance(creditType);
     setBalance(creditType, balance.add(charge));

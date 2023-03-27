@@ -49,8 +49,12 @@ public class WalletChargeRequest {
   @Size(max = 100, message = "A \"description\" field length is over than 100.")
   private String description;
 
-  public WalletChargeRequest(String companyId, CreditType creditType, BigDecimal amount,
-      String description) {
+  public WalletChargeRequest(
+      String companyId,
+      CreditType creditType,
+      BigDecimal amount,
+      String description
+  ) {
     this.companyId = companyId;
     this.creditType = creditType;
     this.amount = amount;

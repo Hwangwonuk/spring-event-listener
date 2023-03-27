@@ -10,6 +10,7 @@
 package com.example.eventlistener.application;
 
 import com.example.eventlistener.dao.WalletRepository;
+import com.example.eventlistener.dto.WalletChargeDto;
 import com.example.eventlistener.dto.WalletChargeRequest;
 import com.example.eventlistener.dto.WalletCreationDto;
 import com.example.eventlistener.dto.WalletCreationRequest;
@@ -72,12 +73,12 @@ public class WalletService {
    *   - cash
    *   - point
    *
-   * @param request {@link WalletChargeRequest}
+   * @param walletChargeDto {@link WalletChargeDto}
    */
   @Transactional
-  public WalletResponse charge(@NonNull WalletChargeRequest request) {
-    Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(request.getCompanyId());
-    wallet.charge(request);
+  public WalletResponse charge(@NonNull WalletChargeDto walletChargeDto) {
+    Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(walletChargeDto.getCompanyId());
+    wallet.charge(walletChargeDto);
 
     return new WalletResponse(wallet);
   }

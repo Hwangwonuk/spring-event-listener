@@ -11,6 +11,7 @@ package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletService;
 import com.example.eventlistener.dto.RefundRequest;
+import com.example.eventlistener.dto.WalletChargeDto;
 import com.example.eventlistener.dto.WalletChargeRequest;
 import com.example.eventlistener.dto.WalletCreationDto;
 import com.example.eventlistener.dto.WalletCreationRequest;
@@ -83,7 +84,7 @@ public class WalletApi {
   @PostMapping("/charge")
   public WalletResponse charge(@Valid @RequestBody WalletChargeRequest chargeRequest) {
     log.info("chargeRequest : {}", chargeRequest);
-    final WalletResponse walletResponse = walletService.charge(chargeRequest);
+    final WalletResponse walletResponse = walletService.charge(WalletChargeDto.from(chargeRequest));
     return walletResponse;
   }
 
