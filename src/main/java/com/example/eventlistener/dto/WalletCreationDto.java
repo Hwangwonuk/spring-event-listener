@@ -9,6 +9,7 @@
  */
 package com.example.eventlistener.dto;
 
+import com.example.eventlistener.dto.request.WalletCreationRequest;
 import com.example.eventlistener.model.Wallet;
 import java.math.BigDecimal;
 
@@ -31,7 +32,7 @@ public class WalletCreationDto {
   /**
    * company id of wallet owner.
    */
-  private final String companyId;
+  private final Long companyId;
 
   /**
    * cash that you want to charge.
@@ -44,7 +45,7 @@ public class WalletCreationDto {
   private final BigDecimal point;
 
   private WalletCreationDto(
-      String companyId,
+      Long companyId,
       BigDecimal cash,
       BigDecimal point
   ) {

@@ -7,7 +7,7 @@
  * Proprietary and confidential
  * Written by infra Team <wonuk_hwang@bigin.io>, 2023/03/21
  */
-package com.example.eventlistener.dto;
+package com.example.eventlistener.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Digits;
@@ -39,7 +39,7 @@ public class WalletCreationRequest {
    */
   @NotBlank(message = "A \"company_id\" field is missing or its value is blank.")
   @JsonProperty("company_id")
-  private String companyId;
+  private Long companyId;
 
   /**
    * cash that you want to charge.

@@ -38,7 +38,7 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
    * @param companyId
    * @return {@code Wallet} instance.
    */
-  Optional<Wallet> findByCompanyId(String companyId);
+  Optional<Wallet> findByCompanyId(Long companyId);
 
   /**
    * Company Id로 Wallet 조회
@@ -46,7 +46,7 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
    * @return Wallet Entity
    * @throws
    */
-  default Wallet findWalletByCompanyIdOrElseThrow(String companyId) {
+  default Wallet findWalletByCompanyIdOrElseThrow(Long companyId) {
     return findByCompanyId(companyId)
         .orElseThrow(() -> new RuntimeException("Wallet is not found by " + companyId));
   }

@@ -7,7 +7,7 @@
  * Proprietary and confidential
  * Written by infra Team <wonuk_hwang@bigin.io>, 2023/03/22
  */
-package com.example.eventlistener.dto;
+package com.example.eventlistener.dto.request;
 
 import com.example.eventlistener.model.CreditType;
 import jakarta.validation.constraints.Min;
@@ -15,7 +15,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -37,7 +36,7 @@ import lombok.ToString;
 public class WalletChargeRequest {
 
   @NotNull(message = "A \"company_id\" is not allowed null.")
-  private String companyId;
+  private Long companyId;
 
   @NotNull(message = "A \"credit_type\" is not allowed null.")
   private CreditType creditType;
@@ -50,7 +49,7 @@ public class WalletChargeRequest {
   private String description;
 
   public WalletChargeRequest(
-      String companyId,
+      Long companyId,
       CreditType creditType,
       BigDecimal amount,
       String description

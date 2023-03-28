@@ -10,11 +10,12 @@
 package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletService;
-import com.example.eventlistener.dto.RefundRequest;
+import com.example.eventlistener.dto.WalletRefundDto;
+import com.example.eventlistener.dto.request.WalletRefundRequest;
 import com.example.eventlistener.dto.WalletChargeDto;
-import com.example.eventlistener.dto.WalletChargeRequest;
+import com.example.eventlistener.dto.request.WalletChargeRequest;
 import com.example.eventlistener.dto.WalletCreationDto;
-import com.example.eventlistener.dto.WalletCreationRequest;
+import com.example.eventlistener.dto.request.WalletCreationRequest;
 import com.example.eventlistener.dto.WalletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +54,7 @@ public class WalletApi {
    *
    * @param request wallet essential data to create wallet.
    * @return ResponseCommonEntity with saved Wallet info.
-   * @see com.example.eventlistener.dto.WalletCreationRequest
+   * @see WalletCreationRequest
    */
   @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
   public WalletResponse create(@Valid @RequestBody WalletCreationRequest request) {
@@ -69,7 +70,7 @@ public class WalletApi {
    * @return WalletResponse;
    */
   @GetMapping("/{companyId}")
-  public WalletResponse getWallet(@PathVariable String companyId) {
+  public WalletResponse getWallet(@PathVariable Long companyId) {
     log.info("wallet companyId : {}", companyId);
     final WalletResponse walletResponse = walletService.findWalletByCompanyId(companyId);
     return walletResponse;
@@ -90,12 +91,13 @@ public class WalletApi {
 
   /**
    * 환불 하다.
-   * @param refundDto
+   * @param refundRequest
    * @return
    */
   @PostMapping("/refund")
-  public WalletResponse refund(@Valid @RequestBody RefundRequest refundDto) {
-    log.info("refund data : {}", refundDto);
+  public WalletResponse refund(@Valid @RequestBody WalletRefundRequest refundRequest) {
+    log.info("refund data : {}", refundRequest);
+    final WalletResponse walletResponse = walletService.refund(WalletRefundDto.from(refundRequest));
     return null;
   }
 

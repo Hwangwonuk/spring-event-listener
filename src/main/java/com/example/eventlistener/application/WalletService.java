@@ -11,11 +11,11 @@ package com.example.eventlistener.application;
 
 import com.example.eventlistener.dao.WalletRepository;
 import com.example.eventlistener.dto.WalletChargeDto;
-import com.example.eventlistener.dto.WalletChargeRequest;
 import com.example.eventlistener.dto.WalletCreationDto;
-import com.example.eventlistener.dto.WalletCreationRequest;
+import com.example.eventlistener.dto.WalletRefundDto;
 import com.example.eventlistener.dto.WalletResponse;
 import com.example.eventlistener.model.Wallet;
+import com.example.eventlistener.model.WalletLog;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +63,7 @@ public class WalletService {
    * @param companyId 회사 ID
    * @return WalletResponse
    */
-  public WalletResponse findWalletByCompanyId(String companyId) {
+  public WalletResponse findWalletByCompanyId(Long companyId) {
     Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
     return new WalletResponse(wallet);
   }
@@ -81,6 +81,18 @@ public class WalletService {
     wallet.charge(walletChargeDto);
 
     return new WalletResponse(wallet);
+  }
+
+  /**
+   * refund by walletLogId
+   * @param refundDto
+   */
+  @Transactional
+  public WalletResponse refund(WalletRefundDto refundDto) {
+    final Long companyId = refundDto.getCompanyId();
+    final Long refundWalletLogId = refundDto.getRefundWalletLogId();
+
+    return null;
   }
 
 }

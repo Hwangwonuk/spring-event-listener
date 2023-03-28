@@ -7,9 +7,8 @@
  * Proprietary and confidential
  * Written by infra Team <wonuk_hwang@bigin.io>, 2023/03/25
  */
-package com.example.eventlistener.dto;
+package com.example.eventlistener.dto.request;
 
-import com.example.eventlistener.model.ProcessType;
 import com.example.eventlistener.model.ServiceType;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -35,13 +34,13 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
-public class RefundRequest {
+public class WalletRefundRequest {
 
   /**
    * 회사 아이디.
    */
   @NotBlank(message = "A \"company_id\" field is missing or its value is blank.")
-  private String companyId;
+  private Long companyId;
 
   /**
    * 서비스 종류.

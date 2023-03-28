@@ -9,6 +9,7 @@
  */
 package com.example.eventlistener.dto;
 
+import com.example.eventlistener.dto.request.WalletChargeRequest;
 import com.example.eventlistener.model.CreditType;
 import java.math.BigDecimal;
 import lombok.AccessLevel;
@@ -36,7 +37,7 @@ public class WalletChargeDto {
   /**
    * 회사 ID.
    */
-  private String companyId;
+  private Long companyId;
 
   /**
    * Point Or Cash,
@@ -54,7 +55,7 @@ public class WalletChargeDto {
   private String description;
 
   private WalletChargeDto(
-      @NonNull String companyId,
+      @NonNull Long companyId,
       @NonNull CreditType creditType,
       @NonNull BigDecimal amount,
       String description

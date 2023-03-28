@@ -12,7 +12,6 @@ package com.example.eventlistener.model;
 import static jakarta.persistence.FetchType.LAZY;
 
 import com.example.eventlistener.dto.WalletChargeDto;
-import com.example.eventlistener.dto.WalletChargeRequest;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -54,7 +53,7 @@ public class Wallet {
   private Long id;
 
   @Column(name = "company", nullable = false)
-  private String companyId;
+  private Long companyId;
 
   @Column(name = "point", nullable = false, precision = 14, scale = 2)
   @Digits(integer = 12, fraction = 2)
@@ -81,7 +80,7 @@ public class Wallet {
    * @return {@code Wallet} instance.
    */
   public static Wallet create(
-      @NonNull String companyId,
+      @NonNull Long companyId,
       @NonNull BigDecimal cash,
       @NonNull BigDecimal point) {
     Wallet wallet = new Wallet();
