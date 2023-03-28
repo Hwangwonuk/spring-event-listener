@@ -1,0 +1,9 @@
+### wallet 생성
+POST http://localhost:8080/v1/wallet
+Content-Type: application/json
+
+{
+  "company_id": 1,
+  "marketing_credit": 100000,
+  "credit" : 50000
+}
