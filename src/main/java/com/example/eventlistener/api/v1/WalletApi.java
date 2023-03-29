@@ -72,7 +72,7 @@ public class WalletApi {
   @GetMapping("/{companyId}")
   public WalletResponse getWallet(@PathVariable Long companyId) {
     log.info("wallet companyId : {}", companyId);
-    final WalletResponse walletResponse = walletService.findWalletByCompanyId(companyId);
+    final WalletResponse walletResponse = walletService.findWalletByCompanyIdOrElseThrow(companyId);
     return walletResponse;
   }
 
@@ -98,7 +98,7 @@ public class WalletApi {
   public WalletResponse refund(@Valid @RequestBody WalletRefundRequest refundRequest) {
     log.info("refund data : {}", refundRequest);
     final WalletResponse walletResponse = walletService.refund(WalletRefundDto.from(refundRequest));
-    return null;
+    return walletResponse;
   }
 
 }

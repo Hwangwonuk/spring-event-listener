@@ -66,4 +66,14 @@ public class WalletUsedLog {
   @ToString.Exclude
   private WalletLog walletLog;
   // ============== parent ==============
+
+  WalletUsedLog(
+      WalletLog walletLog,
+      Long serviceId,
+      ServiceType serviceType) {
+    this.walletLog = walletLog;
+    this.serviceId = serviceId;
+    this.serviceType = serviceType;
+  }
+
 }

@@ -11,6 +11,8 @@ package com.example.eventlistener.model;
 
 import static jakarta.persistence.FetchType.LAZY;
 
+import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,12 +22,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -61,7 +65,10 @@ public class WalletLog {
   private CreditType creditType;
 
   @Column(name = "point", precision = 14, scale = 2, nullable = false)
-  private BigDecimal point;
+  private BigDecimal credit;
+
+  @Column(name = "refund_wallet_log_id")
+  private Long refundWalletLogId;
 
   @Column(name = "description", length = 100)
   private String description;
@@ -75,4 +82,38 @@ public class WalletLog {
   @ToString.Exclude
   private Wallet wallet;
   // ============== parent ==============
+
+  // ============== child ==============
+  @OneToOne(mappedBy = "walletLog", fetch = LAZY, cascade = CascadeType.ALL)
+  private WalletUsedLog walletUsedLog;
+  // ============== child ==============
+
+
+  public void appendRefundLog(
+      @NonNull Long serviceId,
+      @Nonnull ServiceType serviceType
+  ) {
+    this.walletUsedLog = new WalletUsedLog(
+        this
+        , serviceId
+        , serviceType
+    );
+  }
+
+  @Builder
+  WalletLog(
+      @NonNull Wallet wallet,
+      @NonNull ProcessType processType,
+      @NonNull CreditType creditType,
+      @NonNull BigDecimal credit,
+      String description,
+      Long refundWalletLogId) {
+    this.wallet = wallet;
+    this.processType = processType;
+    this.creditType = creditType;
+    this.credit = credit;
+    this.description = description;
+    this.refundWalletLogId = refundWalletLogId;
+  }
+
 }

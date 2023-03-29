@@ -43,6 +43,12 @@ public class WalletRefundRequest {
   private Long companyId;
 
   /**
+   * 서비스 아이디.
+   */
+  @NotBlank(message = "A \"service_id\" field is missing or its value is blank.")
+  private Long serviceId;
+
+  /**
    * 서비스 종류.
    */
   @NotNull(message = "A \"service_type\" field is missing.")

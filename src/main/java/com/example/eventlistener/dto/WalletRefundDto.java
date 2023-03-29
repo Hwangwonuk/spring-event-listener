@@ -34,6 +34,11 @@ public class WalletRefundDto {
   private Long companyId;
 
   /**
+   * Service ID.
+   */
+  private Long serviceId;
+
+  /**
    * 서비스 종류.
    */
   private ServiceType serviceType;
@@ -55,6 +60,7 @@ public class WalletRefundDto {
 
   private WalletRefundDto(
       Long companyId,
+      Long serviceId,
       ServiceType serviceType,
       BigDecimal refundAmount,
       String description,
@@ -70,6 +76,7 @@ public class WalletRefundDto {
   public static WalletRefundDto from(WalletRefundRequest request) {
     return new WalletRefundDto(
       request.getCompanyId(),
+      request.getServiceId(),
       request.getServiceType(),
       request.getRefundAmount(),
       request.getDescription(),

@@ -9,6 +9,7 @@
  */
 package com.example.eventlistener.application;
 
+import com.example.eventlistener.dao.WalletLogRepository;
 import com.example.eventlistener.dao.WalletRepository;
 import com.example.eventlistener.dto.WalletChargeDto;
 import com.example.eventlistener.dto.WalletCreationDto;
@@ -45,6 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class WalletService {
 
   private final WalletRepository walletRepository;
+  private final WalletLogRepository walletLogRepository;
 
   /**
    * <p> create wallet.</p>
@@ -63,7 +65,7 @@ public class WalletService {
    * @param companyId 회사 ID
    * @return WalletResponse
    */
-  public WalletResponse findWalletByCompanyId(Long companyId) {
+  public WalletResponse findWalletByCompanyIdOrElseThrow(Long companyId) {
     Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
     return new WalletResponse(wallet);
   }
@@ -91,6 +93,12 @@ public class WalletService {
   public WalletResponse refund(WalletRefundDto refundDto) {
     final Long companyId = refundDto.getCompanyId();
     final Long refundWalletLogId = refundDto.getRefundWalletLogId();
+
+    final Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
+
+    final WalletLog walletLog = walletLogRepository.findByIdOrElseThrow(refundWalletLogId);
+
+    wallet.refund(walletLog, refundDto);
 
     return null;
   }

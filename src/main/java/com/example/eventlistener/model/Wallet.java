@@ -12,6 +12,7 @@ package com.example.eventlistener.model;
 import static jakarta.persistence.FetchType.LAZY;
 
 import com.example.eventlistener.dto.WalletChargeDto;
+import com.example.eventlistener.dto.WalletRefundDto;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -106,6 +107,33 @@ public class Wallet {
     if (charge.compareTo(BigDecimal.ZERO) > 0) {
 //  TODO: WalletLog List add 필요.
     }
+  }
+
+  /**
+   * 해당 CreditType, ProcessType 에 맞게 환불한다
+   *
+   * @param walletLogForRefund
+   * @param walletRefundDto
+   */
+  public void refund(WalletLog walletLogForRefund, WalletRefundDto walletRefundDto) {
+    final CreditType creditType = walletLogForRefund.getCreditType();
+    final BigDecimal refundCredit = walletRefundDto.getRefundAmount();
+
+    BigDecimal balance = getBalance(creditType);
+    setBalance(creditType, balance.add(refundCredit));
+
+    WalletLog walletLog = WalletLog.builder()
+        .wallet(this)
+        .processType(ProcessType.REFUND)
+        .creditType(creditType)
+        .credit(refundCredit)
+        .description(walletRefundDto.getDescription())
+        .refundWalletLogId(walletRefundDto.getRefundWalletLogId())
+        .build();
+
+    walletLog.appendRefundLog(walletRefundDto.getServiceId(), walletRefundDto.getServiceType());
+
+    walletLogs.add(walletLog);
   }
 
   /**
