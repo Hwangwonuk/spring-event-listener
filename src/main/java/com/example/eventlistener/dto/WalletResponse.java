@@ -43,7 +43,7 @@ public class WalletResponse {
    * company Id.
    */
   @NotNull
-  private String companyId;
+  private Long companyId;
 
   /**
    * cash.
