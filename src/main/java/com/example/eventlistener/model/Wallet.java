@@ -136,6 +136,8 @@ public class Wallet {
     walletLogs.add(walletLog);
   }
 
+
+
   /**
    * 입력받은 credit type의 잔액을 조회한다.
    * @param creditType {@link CreditType}

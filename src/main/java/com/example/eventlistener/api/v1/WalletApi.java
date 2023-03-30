@@ -10,7 +10,9 @@
 package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletService;
+import com.example.eventlistener.dto.WalletDeductDto;
 import com.example.eventlistener.dto.WalletRefundDto;
+import com.example.eventlistener.dto.request.WalletDeductRequest;
 import com.example.eventlistener.dto.request.WalletRefundRequest;
 import com.example.eventlistener.dto.WalletChargeDto;
 import com.example.eventlistener.dto.request.WalletChargeRequest;
@@ -99,6 +101,18 @@ public class WalletApi {
     log.info("refund data : {}", refundRequest);
     final WalletResponse walletResponse = walletService.refund(WalletRefundDto.from(refundRequest));
     return walletResponse;
+  }
+
+  /**
+   * 차감 하다.
+   *
+   * @param request
+   */
+  @PostMapping("/deduct")
+  public void deduct(@Valid @RequestBody WalletDeductRequest request) {
+    log.info("deductDto data : {}", request);
+    walletService.deduct(WalletDeductDto.from(request));
+
   }
 
 }
