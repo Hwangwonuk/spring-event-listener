@@ -136,7 +136,50 @@ public class Wallet {
     walletLogs.add(walletLog);
   }
 
+  public void deduct(
+      @NonNull Long serviceId,
+      @NonNull ServiceType serviceType,
+      @NonNull BigDecimal charge,
+      BigDecimal unitPrice,
+      String description
+  ) {
+    deduct(serviceType, charge);
 
+    // add log.
+    WalletLog walletLog =
+        WalletLog.builder()
+            .wallet(this)
+            .processType(ProcessType.USED)
+            .creditType(serviceType.getCreditType())
+            .credit(charge)
+            .description(description)
+            .build();
+
+    walletLog.appendUsedLog(
+        serviceId,
+        serviceType,
+        unitPrice
+    );
+
+    walletLogs.add(walletLog);
+  }
+
+  /**
+   * deduct balance.
+   *
+   * @param serviceType {@code ServiceType}
+   * @param charge used point or cash.
+   */
+  private void deduct(
+      @NonNull ServiceType serviceType,
+      @NonNull BigDecimal charge
+  ) {
+    final CreditType creditType = serviceType.getCreditType();
+
+    BigDecimal balance = getBalance(creditType);
+    setBalance(creditType, balance.subtract(charge));
+
+  }
 
   /**
    * 입력받은 credit type의 잔액을 조회한다.

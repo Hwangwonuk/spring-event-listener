@@ -94,9 +94,22 @@ public class WalletLog {
       @Nonnull ServiceType serviceType
   ) {
     this.walletUsedLog = new WalletUsedLog(
-        this
-        , serviceId
-        , serviceType
+        this,
+        serviceId,
+        serviceType
+    );
+  }
+
+  public void appendUsedLog(
+      @NonNull Long serviceId,
+      @NonNull ServiceType serviceType,
+      BigDecimal unitPrice
+  ) {
+    this.walletUsedLog = new WalletUsedLog(
+        this,
+        serviceId,
+        serviceType,
+        unitPrice
     );
   }
 

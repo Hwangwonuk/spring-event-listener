@@ -70,10 +70,23 @@ public class WalletUsedLog {
   WalletUsedLog(
       WalletLog walletLog,
       Long serviceId,
-      ServiceType serviceType) {
+      ServiceType serviceType
+  ) {
     this.walletLog = walletLog;
     this.serviceId = serviceId;
     this.serviceType = serviceType;
+  }
+
+  WalletUsedLog(
+      WalletLog walletLog,
+      Long serviceId,
+      ServiceType serviceType,
+      BigDecimal unitPrice
+  ) {
+    this.walletLog = walletLog;
+    this.serviceId = serviceId;
+    this.serviceType = serviceType;
+    this.unitPrice = unitPrice;
   }
 
 }
