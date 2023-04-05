@@ -19,9 +19,11 @@ import com.example.eventlistener.dto.request.WalletChargeRequest;
 import com.example.eventlistener.dto.WalletCreationDto;
 import com.example.eventlistener.dto.request.WalletCreationRequest;
 import com.example.eventlistener.dto.WalletResponse;
+import com.example.eventlistener.event.DeductEvent;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WalletApi {
 
   private final WalletService walletService;
+  private final ApplicationEventPublisher applicationEventPublisher;
 
   /**
    * <p> Call when user create new project. </p>
@@ -111,8 +114,11 @@ public class WalletApi {
   @PostMapping("/deduct")
   public void deduct(@Valid @RequestBody WalletDeductRequest request) {
     log.info("deductDto data : {}", request);
-    walletService.deduct(WalletDeductDto.from(request));
-
+    // deductDto -> DeductEvent converting
+    DeductEvent deductEvent = new DeductEvent(this, WalletDeductDto.from(request));
+    // Event -> publisher -> listener
+    // publish 까지는 동기식으로 동작
+    applicationEventPublisher.publishEvent(deductEvent);
   }
 
 }
