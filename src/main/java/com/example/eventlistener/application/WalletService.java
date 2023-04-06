@@ -134,7 +134,13 @@ public class WalletService {
           final Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(
               dto.getCompanyId());
 
-//          wallet.deduct();
+          wallet.deduct(
+              dto.getServiceId(),
+              dto.getServiceType(),
+              dto.getCharge(),
+              dto.getUnitPrice(),
+              dto.getDescription()
+          );
         }
     );
   }
