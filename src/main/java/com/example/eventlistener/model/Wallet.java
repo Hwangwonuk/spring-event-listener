@@ -105,7 +105,15 @@ public class Wallet {
     setBalance(creditType, balance.add(charge));
 
     if (charge.compareTo(BigDecimal.ZERO) > 0) {
-//  TODO: WalletLog List add 필요.
+      walletLogs.add(
+          WalletLog.builder()
+              .wallet(this)
+              .processType(ProcessType.CHARGE)
+              .creditType(creditType)
+              .credit(charge)
+              .description(walletChargeDto.getDescription())
+              .build()
+      );
     }
   }
 
