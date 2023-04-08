@@ -7,3 +7,72 @@ Content-Type: application/json
   "marketing_credit": 100000,
   "credit" : 50000
 }
+
+> {% //response handler
+client.global.set("companyId", 1); // (1)
+%}
+
+### wallet 조회
+GET http://localhost:8080/v1/wallet/{{compnayId}}
+Content-Type: application/json
+
+### wallet point 충전
+POST http://localhost:8080/v1/wallet/charge
+Content-Type: application/json
+
+{
+  "company_id": {{companyId}},
+  "credit_type": "POINT",
+  "amount" : 1000000,
+  "description" : "관리자 충전"
+}
+
+### wallet cash 충전
+POST http://localhost:8080/v1/wallet/charge
+Content-Type: application/json
+
+{
+  "company_id": {{companyId}},
+  "credit_type": "CASH",
+  "amount" : 2000000,
+  "description" : "고객사 카드 결제 충전"
+}
+
+### wallet refund 환불
+POST http://localhost:8080/v1/wallet/charge
+Content-Type: application/json
+
+{
+  "company_id": {{companyId}},
+  "service_id": 1,
+  "service_type" : "CASH_SERVICE1",
+  "refund_amount" : 10000,
+  "description" : "서비스 장애 환불",
+  "refund_wallet_log_id" : 1
+}
+
+### wallet deduct CASH_SERVICE 차감
+POST http://localhost:8080/v1/wallet/deduct
+Content-Type: application/json
+
+{
+  "company_id": {{companyId}},
+  "service_id": 1,
+  "service_type" : "CASH_SERVICE1",
+  "charge" : 1000,
+  "description" : "현금 서비스1 사용 차감",
+  "unit_price" : 100
+}
+
+### wallet deduct POINT_SERVICE 차감
+POST http://localhost:8080/v1/wallet/deduct
+Content-Type: application/json
+
+{
+  "company_id": {{companyId}},
+  "service_id": 2,
+  "service_type" : "POINT_SERVICE1",
+  "charge" : 100,
+  "description" : "포인트 서비스1 사용 차감",
+  "unit_price" : 10
+}
