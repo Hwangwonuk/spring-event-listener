@@ -9,8 +9,9 @@
  */
 package com.example.eventlistener.dto.response;
 
-import com.example.eventlistener.model.CreditType;
-import java.math.BigDecimal;
+import com.example.eventlistener.dto.WalletLogDto;
+import java.util.List;
+import lombok.Builder;
 import lombok.Getter;
 
 /**
@@ -25,45 +26,19 @@ import lombok.Getter;
  * @since (ex : 5 + 5)
  */
 @Getter
+@Builder
 public class WalletLogResponse {
 
-  /**
-   * wallet_log id.
-   */
-  private final Long id;
+  private List<WalletLogDto> walletLogList;
 
-  /**
-   * company id.
-   */
-  private final Long companyId;
+  private Long total;
 
-  /**
-   * CreditType CASH or POINT.
-   */
-  private final CreditType creditType;
+  private boolean more;
 
-  /**
-   * 금액.
-   */
-  private final BigDecimal credit;
-
-  /**
-   * 로그에 대한 설명.
-   */
-  private final String description;
-
-  public WalletLogResponse(
-      Long id,
-      Long companyId,
-      CreditType creditType,
-      BigDecimal credit,
-      String description
-  ) {
-    this.id = id;
-    this.companyId = companyId;
-    this.creditType = creditType;
-    this.credit = credit;
-    this.description = description;
+  public WalletLogResponse(List<WalletLogDto> walletLogList, Long total, boolean more) {
+    this.walletLogList = walletLogList;
+    this.total = total;
+    this.more = more;
   }
 
 }
