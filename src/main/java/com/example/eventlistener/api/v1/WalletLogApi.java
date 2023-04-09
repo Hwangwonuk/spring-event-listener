@@ -1,0 +1,52 @@
+/*
+ * Created by Wonuk Hwang on 2023/04/08
+ * As part of Bigin
+ *
+ * Copyright (C) Bigin (https://bigin.io/main) - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by infra Team <wonuk_hwang@bigin.io>, 2023/04/08
+ */
+package com.example.eventlistener.api.v1;
+
+import com.example.eventlistener.application.WalletService;
+import com.example.eventlistener.dto.response.WalletLogResponse;
+import jakarta.validation.constraints.Min;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * create on 2023/04/08. create by IntelliJ IDEA.
+ *
+ * <p> Api related with wallet_log and wallet_used_log </p>
+ * <p> {@link com.example.eventlistener.model.WalletLog} and {@link com.example.eventlistener.model.WalletUsedLog} </p> *
+ *
+ * @author wonukHwang
+ * @version 1.0
+ * @see
+ * @since (ex : 5 + 5)
+ */
+
+@Slf4j
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/v1/wallet_log")
+public class WalletLogApi {
+
+  private final WalletService walletService;
+
+  @GetMapping("/{companyId}")
+  public WalletLogResponse getWalletLog(
+      @PathVariable String companyId,
+      @RequestParam @Min(value = 1, message = "\"limit\" must be greater than or equal to 1.") Long limit,
+      @RequestParam @Min(value = 0, message = "\"offset\" must be greater than or equal to 0.") Long offset
+  ) {
+
+    return null;
+  }
+}
