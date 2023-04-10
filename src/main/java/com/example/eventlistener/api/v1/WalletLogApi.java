@@ -9,7 +9,7 @@
  */
 package com.example.eventlistener.api.v1;
 
-import com.example.eventlistener.application.WalletService;
+import com.example.eventlistener.application.WalletLogService;
 import com.example.eventlistener.dto.response.WalletLogResponse;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
@@ -38,15 +38,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/wallet_log")
 public class WalletLogApi {
 
-  private final WalletService walletService;
+  private final WalletLogService walletLogService;
 
   @GetMapping("/{companyId}")
-  public WalletLogResponse getWalletLog(
-      @PathVariable String companyId,
+  public WalletLogResponse findWalletLogByCompanyIdWithPaging(
+      @PathVariable Long companyId,
       @RequestParam @Min(value = 1, message = "\"limit\" must be greater than or equal to 1.") Long limit,
       @RequestParam @Min(value = 0, message = "\"offset\" must be greater than or equal to 0.") Long offset
   ) {
-
-    return null;
+    WalletLogResponse walletLogResponse =
+        walletLogService.findWalletLogByCompanyId(companyId, limit, offset);
+    
+    return walletLogResponse;
   }
+
 }
