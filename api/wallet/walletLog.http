@@ -1,0 +1,4 @@
+### WalletLog 페이징 조회
+GET http://localhost:8080//v1/wallet_log/1
+Content-Type: application/json
+
