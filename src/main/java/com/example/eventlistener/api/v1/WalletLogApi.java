@@ -10,12 +10,16 @@
 package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletLogService;
+import com.example.eventlistener.dto.request.WalletLogCreationRequest;
 import com.example.eventlistener.dto.response.WalletLogResponse;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +44,13 @@ public class WalletLogApi {
 
   private final WalletLogService walletLogService;
 
+  /**
+   * find WalletLog by companyId
+   * @param companyId 회사 아이디.
+   * @param limit
+   * @param offset
+   * @return
+   */
   @GetMapping("/{companyId}")
   public WalletLogResponse findWalletLogByCompanyIdWithPaging(
       @PathVariable Long companyId,
@@ -50,6 +61,17 @@ public class WalletLogApi {
         walletLogService.findWalletLogByCompanyId(companyId, limit, offset);
     
     return walletLogResponse;
+  }
+
+  /**
+   * WalletLog를 생성한다.
+   * @param
+   * @return
+   */
+  @PostMapping
+  public void createWalletLog(@Valid @RequestBody WalletLogCreationRequest request) {
+    
+    return;
   }
 
 }
