@@ -13,7 +13,6 @@ import com.example.eventlistener.dto.request.WalletDeductRequest;
 import com.example.eventlistener.model.ServiceType;
 import java.math.BigDecimal;
 import lombok.Getter;
-import lombok.NonNull;
 
 /**
  * create on 2023/03/30. create by IntelliJ IDEA.
