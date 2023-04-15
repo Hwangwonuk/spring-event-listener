@@ -10,6 +10,7 @@
 package com.example.eventlistener.dto;
 
 import com.example.eventlistener.dto.request.WalletCreationRequest;
+import com.example.eventlistener.model.CreditType;
 import com.example.eventlistener.model.Wallet;
 import java.math.BigDecimal;
 
@@ -35,38 +36,38 @@ public class WalletCreationDto {
   private final Long companyId;
 
   /**
-   * cash that you want to charge.
+   * point or cash
    */
-  private final BigDecimal cash;
+  private CreditType creditType;
 
   /**
-   * point that you want to charge.
+   * cash that you want to charge.
    */
-  private final BigDecimal point;
+  private BigDecimal amount;
 
   private WalletCreationDto(
       Long companyId,
-      BigDecimal cash,
-      BigDecimal point
+      CreditType creditType,
+      BigDecimal amount
   ) {
     this.companyId = companyId;
-    this.cash = cash;
-    this.point = point;
+    this.creditType = creditType;
+    this.amount = amount;
   }
 
   public static WalletCreationDto from(WalletCreationRequest request) {
     return new WalletCreationDto(
         request.getCompanyId(),
-        request.getCash(),
-        request.getPoint()
+        request.getCreditType(),
+        request.getAmount()
     );
   }
 
   public Wallet toEntity() {
     return Wallet.create(
         this.companyId,
-        this.cash,
-        this.point
+        this.creditType,
+        this.amount
     );
   }
 

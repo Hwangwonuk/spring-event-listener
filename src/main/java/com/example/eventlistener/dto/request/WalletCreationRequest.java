@@ -9,6 +9,7 @@
  */
 package com.example.eventlistener.dto.request;
 
+import com.example.eventlistener.model.CreditType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -42,19 +43,18 @@ public class WalletCreationRequest {
   private Long companyId;
 
   /**
+   * point or cash
+   */
+  @NotNull(message = "A \"credit_type\" is not allowed null.")
+  @JsonProperty("credit_type")
+  private CreditType creditType;
+
+  /**
    * cash that you want to charge.
    */
   @NotNull
   @Digits(integer = 18, fraction = 2, message = "the point of cash field can not over 999,999,999 billion")
   @JsonProperty("cash")
-  private BigDecimal cash;
-
-  /**
-   * point that you want to charge.
-   */
-  @NotNull
-  @Digits(integer = 18, fraction = 2)
-  @JsonProperty("point")
-  private BigDecimal point;
+  private BigDecimal amount;
 
 }

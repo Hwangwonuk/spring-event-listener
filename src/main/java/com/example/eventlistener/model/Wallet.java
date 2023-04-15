@@ -76,18 +76,21 @@ public class Wallet {
    * static {@code Wallet} constructor.
    *
    * @param companyId 회사 아이디
-   * @param cash 현금
-   * @param point 포인트
+   * @param creditType 현금 or 포인트
+   * @param amount 포인트
    * @return {@code Wallet} instance.
    */
   public static Wallet create(
       @NonNull Long companyId,
-      @NonNull BigDecimal cash,
-      @NonNull BigDecimal point) {
+      @NonNull CreditType creditType,
+      @NonNull BigDecimal amount) {
     Wallet wallet = new Wallet();
     wallet.companyId = companyId;
-    wallet.cash = cash;
-    wallet.point = point;
+    if (creditType.equals(CreditType.CASH)) {
+      wallet.cash = amount;
+    } else {
+      wallet.point = amount;
+    }
 
     return wallet;
   }
