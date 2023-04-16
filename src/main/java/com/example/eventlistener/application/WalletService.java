@@ -15,7 +15,7 @@ import com.example.eventlistener.dto.WalletChargeDto;
 import com.example.eventlistener.dto.WalletCreationDto;
 import com.example.eventlistener.dto.WalletDeductDto;
 import com.example.eventlistener.dto.WalletRefundDto;
-import com.example.eventlistener.dto.WalletResponse;
+import com.example.eventlistener.dto.response.WalletResponse;
 import com.example.eventlistener.model.Wallet;
 import com.example.eventlistener.model.WalletLog;
 import java.util.List;

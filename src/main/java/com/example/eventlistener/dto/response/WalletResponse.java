@@ -7,7 +7,7 @@
  * Proprietary and confidential
  * Written by infra Team <wonuk_hwang@bigin.io>, 2023/03/21
  */
-package com.example.eventlistener.dto;
+package com.example.eventlistener.dto.response;
 
 import com.example.eventlistener.model.Wallet;
 import jakarta.validation.constraints.NotNull;

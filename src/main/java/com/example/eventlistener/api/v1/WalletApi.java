@@ -14,7 +14,7 @@ import com.example.eventlistener.dto.WalletChargeDto;
 import com.example.eventlistener.dto.WalletCreationDto;
 import com.example.eventlistener.dto.WalletDeductDto;
 import com.example.eventlistener.dto.WalletRefundDto;
-import com.example.eventlistener.dto.WalletResponse;
+import com.example.eventlistener.dto.response.WalletResponse;
 import com.example.eventlistener.dto.request.WalletChargeRequest;
 import com.example.eventlistener.dto.request.WalletCreationRequest;
 import com.example.eventlistener.dto.request.WalletDeductRequest;
