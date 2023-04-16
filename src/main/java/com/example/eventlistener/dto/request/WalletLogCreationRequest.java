@@ -9,7 +9,14 @@
  */
 package com.example.eventlistener.dto.request;
 
+import com.example.eventlistener.model.CreditType;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * create on 2023/04/12. create by IntelliJ IDEA.
@@ -23,7 +30,28 @@ import lombok.Getter;
  * @since (ex : 5 + 5)
  */
 @Getter
+@NoArgsConstructor
 public class WalletLogCreationRequest {
 
+  /* 회사 아이디. */
+  @Min(value = 0, message = "A value of \"company_id\" field is not valid value.")
+  @NotNull(message = "A \"company_id\" is not allowed null.")
+  @JsonProperty("company_id")
   private Long companyId;
+
+  /* 포인트 or 현금 */
+  @NotNull(message = "A \"credit_type\" is not allowed null.")
+  @JsonProperty("credit_type")
+  private CreditType creditType;
+
+  /* 금액 */
+  @NotNull(message = "A \"credit_type\" is not allowed null.")
+  @JsonProperty("amount")
+  private BigDecimal amount;
+
+  @Size(max = 100, message = "A \"description\" field length is over than 100.")
+  @JsonProperty("description")
+  private String description;
+
+
 }

@@ -10,7 +10,9 @@
 package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletLogService;
+import com.example.eventlistener.dto.WalletLogDto;
 import com.example.eventlistener.dto.request.WalletLogCreationRequest;
+import com.example.eventlistener.dto.response.WalletLogCreationDto;
 import com.example.eventlistener.dto.response.WalletLogResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -70,7 +72,10 @@ public class WalletLogApi {
    */
   @PostMapping
   public void createWalletLog(@Valid @RequestBody WalletLogCreationRequest request) {
-    
+
+    // TODO: create wallet log service logic
+    WalletLogCreationDto dto = WalletLogCreationDto.from(request);
+
     return;
   }
 
