@@ -12,9 +12,15 @@ package com.example.eventlistener.application;
 import com.example.eventlistener.dao.WalletLogRepository;
 import com.example.eventlistener.dao.WalletRepository;
 import com.example.eventlistener.dto.WalletLogDto;
+import com.example.eventlistener.dto.WalletLogCreationDto;
 import com.example.eventlistener.dto.response.WalletLogResponse;
+import com.example.eventlistener.model.CreditType;
+import com.example.eventlistener.model.ProcessType;
 import com.example.eventlistener.model.Wallet;
+import com.example.eventlistener.model.WalletLog;
+import java.math.BigDecimal;
 import java.util.List;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -73,6 +79,33 @@ public class WalletLogService {
         .total(total)
         .more(more)
         .build();
+  }
+
+  /**
+   * log 를 저장한다.
+   * @param companyId 캠페인 아이디
+   * @param serviceId 서비스 아이디
+   * @param creditType 현금 or 포인트
+   * @param amount 금액
+   * @param description 설명
+   */
+  @Transactional
+  public void createWalletLog(
+      @NonNull Long companyId,
+      Long serviceId,
+      @NonNull ProcessType processType,
+      @NonNull CreditType creditType,
+      @NonNull BigDecimal amount,
+      String description
+  ) {
+
+
+    final Wallet wallet =
+        walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
+
+    // add log.
+
+//    walletLogRepository.save(walletLog);
   }
 
 }

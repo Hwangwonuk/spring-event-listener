@@ -10,6 +10,7 @@
 package com.example.eventlistener.dto.request;
 
 import com.example.eventlistener.model.CreditType;
+import com.example.eventlistener.model.ProcessType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -38,6 +39,15 @@ public class WalletLogCreationRequest {
   @NotNull(message = "A \"company_id\" is not allowed null.")
   @JsonProperty("company_id")
   private Long companyId;
+
+  /* 서비스 아이디 nullable(서비스 이외의 용도도 허용하기 위해) */
+  @JsonProperty("service_id")
+  private Long serviceId;
+
+  /* 충전, 사용, 환불 */
+  @NotNull(message = "A \"process_type\" is not allowed null.")
+  @JsonProperty("process_type")
+  private ProcessType processType;
 
   /* 포인트 or 현금 */
   @NotNull(message = "A \"credit_type\" is not allowed null.")
