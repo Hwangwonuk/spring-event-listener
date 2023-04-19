@@ -12,10 +12,10 @@ package com.example.eventlistener.application;
 import com.example.eventlistener.dao.WalletLogRepository;
 import com.example.eventlistener.dao.WalletRepository;
 import com.example.eventlistener.dto.WalletLogDto;
-import com.example.eventlistener.dto.WalletLogCreationDto;
 import com.example.eventlistener.dto.response.WalletLogResponse;
 import com.example.eventlistener.model.CreditType;
 import com.example.eventlistener.model.ProcessType;
+import com.example.eventlistener.model.ServiceType;
 import com.example.eventlistener.model.Wallet;
 import com.example.eventlistener.model.WalletLog;
 import java.math.BigDecimal;
@@ -93,9 +93,11 @@ public class WalletLogService {
   public void createWalletLog(
       @NonNull Long companyId,
       Long serviceId,
+      ServiceType serviceType,
       @NonNull ProcessType processType,
       @NonNull CreditType creditType,
       @NonNull BigDecimal amount,
+      BigDecimal unitPrice,
       String description
   ) {
 
@@ -104,8 +106,24 @@ public class WalletLogService {
         walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
 
     // add log.
+    WalletLog walletLog =
+        WalletLog.builder()
+            .wallet(wallet)
+            .processType(processType)
+            .creditType(creditType)
+            .credit(amount)
+            .description(description)
+            .build();
 
-//    walletLogRepository.save(walletLog);
+    if (serviceId != null && processType.equals(ProcessType.USED)) {
+      walletLog.appendUsedLog(
+          serviceId,
+          serviceType,
+          unitPrice
+      );
+    }
+
+    walletLogRepository.save(walletLog);
   }
 
 }

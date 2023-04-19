@@ -75,9 +75,11 @@ public class WalletLogApi {
     walletLogService.createWalletLog(
         dto.getCompanyId(),
         dto.getServiceId(),
+        dto.getServiceType(),
         dto.getProcessType(),
         dto.getCreditType(),
         dto.getAmount(),
+        dto.getUnitPrice(),
         dto.getDescription()
     );
 

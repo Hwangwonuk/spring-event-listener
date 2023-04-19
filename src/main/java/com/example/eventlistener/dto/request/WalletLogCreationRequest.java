@@ -11,6 +11,7 @@ package com.example.eventlistener.dto.request;
 
 import com.example.eventlistener.model.CreditType;
 import com.example.eventlistener.model.ProcessType;
+import com.example.eventlistener.model.ServiceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -44,6 +45,10 @@ public class WalletLogCreationRequest {
   @JsonProperty("service_id")
   private Long serviceId;
 
+  /* service 종류 */
+  @JsonProperty("service_type")
+  private ServiceType serviceType;
+
   /* 충전, 사용, 환불 */
   @NotNull(message = "A \"process_type\" is not allowed null.")
   @JsonProperty("process_type")
@@ -58,6 +63,10 @@ public class WalletLogCreationRequest {
   @NotNull(message = "A \"credit_type\" is not allowed null.")
   @JsonProperty("amount")
   private BigDecimal amount;
+
+  /* 건당 금액 */
+  @JsonProperty("unit_price")
+  private BigDecimal unitPrice;
 
   @Size(max = 100, message = "A \"description\" field length is over than 100.")
   @JsonProperty("description")
