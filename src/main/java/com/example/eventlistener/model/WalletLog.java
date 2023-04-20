@@ -64,8 +64,8 @@ public class WalletLog {
   @Enumerated(EnumType.STRING)
   private CreditType creditType;
 
-  @Column(name = "point", precision = 14, scale = 2, nullable = false)
-  private BigDecimal credit;
+  @Column(name = "amount", precision = 14, scale = 2, nullable = false)
+  private BigDecimal amount;
 
   @Column(name = "refund_wallet_log_id")
   private Long refundWalletLogId;
@@ -118,13 +118,13 @@ public class WalletLog {
       @NonNull Wallet wallet,
       @NonNull ProcessType processType,
       @NonNull CreditType creditType,
-      @NonNull BigDecimal credit,
+      @NonNull BigDecimal amount,
       String description,
       Long refundWalletLogId) {
     this.wallet = wallet;
     this.processType = processType;
     this.creditType = creditType;
-    this.credit = credit;
+    this.amount = amount;
     this.description = description;
     this.refundWalletLogId = refundWalletLogId;
   }

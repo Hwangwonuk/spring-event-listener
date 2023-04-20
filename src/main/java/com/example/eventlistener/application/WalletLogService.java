@@ -111,7 +111,7 @@ public class WalletLogService {
             .wallet(wallet)
             .processType(processType)
             .creditType(creditType)
-            .credit(amount)
+            .amount(amount)
             .description(description)
             .build();
 
