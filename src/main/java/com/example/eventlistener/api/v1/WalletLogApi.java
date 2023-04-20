@@ -12,6 +12,7 @@ package com.example.eventlistener.api.v1;
 import com.example.eventlistener.application.WalletLogService;
 import com.example.eventlistener.dto.request.WalletLogCreationRequest;
 import com.example.eventlistener.dto.WalletLogCreationDto;
+import com.example.eventlistener.dto.request.WalletLogModifyRequest;
 import com.example.eventlistener.dto.response.WalletLogResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -84,6 +85,17 @@ public class WalletLogApi {
     );
 
     //TODO : response code, message
+  }
+
+  /**
+   * WalletLog를 수정한다.
+   * @param
+   * @return
+   */
+  @PostMapping
+  public void modifyWalletLog(@Valid @RequestBody WalletLogModifyRequest request) {
+
+
   }
 
 }
