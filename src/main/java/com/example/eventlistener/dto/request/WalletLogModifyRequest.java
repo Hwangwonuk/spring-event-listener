@@ -9,6 +9,11 @@
  */
 package com.example.eventlistener.dto.request;
 
+import com.example.eventlistener.model.CreditType;
+import com.example.eventlistener.model.ProcessType;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import lombok.Getter;
 
 /**
@@ -24,5 +29,21 @@ import lombok.Getter;
  */
 @Getter
 public class WalletLogModifyRequest {
+
+  @NotNull(message = "A \"wallet_log_id\" is not allowed null.")
+  @JsonProperty("wallet_log_id")
+  private Long walletLogId;
+
+  @JsonProperty("process_type")
+  private ProcessType processType;
+
+  @JsonProperty("credit_type")
+  private CreditType creditType;
+
+  @JsonProperty("amount")
+  private BigDecimal amount;
+
+  @JsonProperty("description")
+  private String description;
 
 }

@@ -10,6 +10,8 @@
 package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletLogService;
+import com.example.eventlistener.dto.WalletLogDto;
+import com.example.eventlistener.dto.WalletLogModifyDto;
 import com.example.eventlistener.dto.request.WalletLogCreationRequest;
 import com.example.eventlistener.dto.WalletLogCreationDto;
 import com.example.eventlistener.dto.request.WalletLogModifyRequest;
@@ -94,7 +96,7 @@ public class WalletLogApi {
    */
   @PostMapping
   public void modifyWalletLog(@Valid @RequestBody WalletLogModifyRequest request) {
-
+    WalletLogModifyDto dto = WalletLogModifyDto.from(request);
 
   }
 

@@ -9,6 +9,11 @@
  */
 package com.example.eventlistener.dto;
 
+import com.example.eventlistener.dto.request.WalletLogModifyRequest;
+import com.example.eventlistener.model.CreditType;
+import com.example.eventlistener.model.ProcessType;
+import jakarta.annotation.Nonnull;
+import java.math.BigDecimal;
 import lombok.Getter;
 
 /**
@@ -24,5 +29,39 @@ import lombok.Getter;
  */
 @Getter
 public class WalletLogModifyDto {
+
+  private Long walletLogId;
+
+  private ProcessType processType;
+
+  private CreditType creditType;
+
+  private BigDecimal amount;
+
+  private String description;
+
+  private WalletLogModifyDto(
+      @Nonnull Long walletLogId,
+      ProcessType processType,
+      CreditType creditType,
+      BigDecimal amount,
+      String description
+  ) {
+    this.walletLogId = walletLogId;
+    this.processType = processType;
+    this.creditType = creditType;
+    this.amount = amount;
+    this.description = description;
+  }
+
+  public static WalletLogModifyDto from(WalletLogModifyRequest request) {
+    return new WalletLogModifyDto(
+        request.getWalletLogId(),
+        request.getProcessType(),
+        request.getCreditType(),
+        request.getAmount(),
+        request.getDescription()
+    );
+  }
 
 }
