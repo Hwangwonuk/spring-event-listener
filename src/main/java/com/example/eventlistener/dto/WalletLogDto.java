@@ -71,7 +71,7 @@ public class WalletLogDto {
         walletLog.getId(),
         companyId,
         walletLog.getCreditType(),
-        walletLog.getCredit(),
+        walletLog.getAmount(),
         walletLog.getDescription()
     );
   }
