@@ -113,7 +113,7 @@ public class Wallet {
               .wallet(this)
               .processType(ProcessType.CHARGE)
               .creditType(creditType)
-              .credit(charge)
+              .amount(charge)
               .description(walletChargeDto.getDescription())
               .build()
       );
@@ -137,7 +137,7 @@ public class Wallet {
         .wallet(this)
         .processType(ProcessType.REFUND)
         .creditType(creditType)
-        .credit(refundCredit)
+        .amount(refundCredit)
         .description(walletRefundDto.getDescription())
         .refundWalletLogId(walletRefundDto.getRefundWalletLogId())
         .build();
@@ -162,7 +162,7 @@ public class Wallet {
             .wallet(this)
             .processType(ProcessType.USED)
             .creditType(serviceType.getCreditType())
-            .credit(charge)
+            .amount(charge)
             .description(description)
             .build();
 
