@@ -20,6 +20,7 @@ import com.example.eventlistener.model.Wallet;
 import com.example.eventlistener.model.WalletLog;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Stream;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -124,6 +125,20 @@ public class WalletLogService {
     }
 
     walletLogRepository.save(walletLog);
+  }
+
+  public void modifyWalletLog(
+      Long companyId,
+      Long walletLogId,
+      ProcessType processType,
+      CreditType creditType,
+      BigDecimal amount,
+      String description
+  ) {
+
+    final Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
+
+
   }
 
 }

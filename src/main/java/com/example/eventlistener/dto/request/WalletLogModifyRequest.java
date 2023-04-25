@@ -30,6 +30,10 @@ import lombok.Getter;
 @Getter
 public class WalletLogModifyRequest {
 
+  @NotNull(message = "A \"company_id\" is not allowed null.")
+  @JsonProperty("company_id")
+  private Long companyId;
+
   @NotNull(message = "A \"wallet_log_id\" is not allowed null.")
   @JsonProperty("wallet_log_id")
   private Long walletLogId;

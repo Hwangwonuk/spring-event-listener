@@ -15,6 +15,7 @@ import com.example.eventlistener.model.ProcessType;
 import jakarta.annotation.Nonnull;
 import java.math.BigDecimal;
 import lombok.Getter;
+import lombok.NonNull;
 
 /**
  * create on 2023/04/19. create by IntelliJ IDEA.
@@ -30,6 +31,8 @@ import lombok.Getter;
 @Getter
 public class WalletLogModifyDto {
 
+  private Long companyId;
+
   private Long walletLogId;
 
   private ProcessType processType;
@@ -41,12 +44,14 @@ public class WalletLogModifyDto {
   private String description;
 
   private WalletLogModifyDto(
+      @NonNull Long companyId,
       @Nonnull Long walletLogId,
       ProcessType processType,
       CreditType creditType,
       BigDecimal amount,
       String description
   ) {
+    this.companyId = companyId;
     this.walletLogId = walletLogId;
     this.processType = processType;
     this.creditType = creditType;
@@ -56,6 +61,7 @@ public class WalletLogModifyDto {
 
   public static WalletLogModifyDto from(WalletLogModifyRequest request) {
     return new WalletLogModifyDto(
+        request.getCompanyId(),
         request.getWalletLogId(),
         request.getProcessType(),
         request.getCreditType(),
