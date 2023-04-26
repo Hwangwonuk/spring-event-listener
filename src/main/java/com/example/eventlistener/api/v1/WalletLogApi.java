@@ -10,7 +10,6 @@
 package com.example.eventlistener.api.v1;
 
 import com.example.eventlistener.application.WalletLogService;
-import com.example.eventlistener.dto.WalletLogDto;
 import com.example.eventlistener.dto.WalletLogModifyDto;
 import com.example.eventlistener.dto.request.WalletLogCreationRequest;
 import com.example.eventlistener.dto.WalletLogCreationDto;
@@ -23,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,7 +94,7 @@ public class WalletLogApi {
    * @param
    * @return
    */
-  @PostMapping
+  @PutMapping
   public void modifyWalletLog(@Valid @RequestBody WalletLogModifyRequest request) {
     WalletLogModifyDto dto = WalletLogModifyDto.from(request);
     walletLogService.modifyWalletLog(
