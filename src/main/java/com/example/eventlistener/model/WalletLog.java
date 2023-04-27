@@ -113,6 +113,18 @@ public class WalletLog {
     );
   }
 
+  public void modifyWalletLog(
+      ProcessType processType,
+      CreditType creditType,
+      BigDecimal amount,
+      String description
+  ) {
+    this.processType = processType != null ? processType : this.processType;
+    this.creditType = creditType != null ? creditType : this.creditType;
+    this.amount = amount != null ? amount : this.amount;
+    this.description = description != null ? description : this.description;
+  }
+
   @Builder
   WalletLog(
       @NonNull Wallet wallet,
