@@ -1,3 +1,13 @@
 ### WalletLog 페이징 조회
 GET http://localhost:8080//v1/wallet_log/1?limit=20&offset=0
 Content-Type: application/json
+
+### walletLog 생성
+POST http://localhost:8080/v1/wallet_log
+Content-Type: application/json
+
+{
+  "company_id": 1,
+  "service_id": 100000,
+  "credit" : 50000
+}

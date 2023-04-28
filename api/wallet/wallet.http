@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "company_id": 1,
-  "marketing_credit": 100000,
-  "credit" : 50000
+  "credit_type": "POINT",
+  "amount" : 1000000
 }
 
 > {% //response handler
