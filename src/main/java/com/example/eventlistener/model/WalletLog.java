@@ -132,7 +132,8 @@ public class WalletLog {
       @NonNull CreditType creditType,
       @NonNull BigDecimal amount,
       String description,
-      Long refundWalletLogId) {
+      Long refundWalletLogId
+  ) {
     this.wallet = wallet;
     this.processType = processType;
     this.creditType = creditType;

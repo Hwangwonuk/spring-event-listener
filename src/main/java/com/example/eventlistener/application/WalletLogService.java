@@ -11,16 +11,15 @@ package com.example.eventlistener.application;
 
 import com.example.eventlistener.dao.WalletLogRepository;
 import com.example.eventlistener.dao.WalletRepository;
+import com.example.eventlistener.dto.WalletLogCreationDto;
 import com.example.eventlistener.dto.WalletLogDto;
 import com.example.eventlistener.dto.response.WalletLogResponse;
 import com.example.eventlistener.model.CreditType;
 import com.example.eventlistener.model.ProcessType;
-import com.example.eventlistener.model.ServiceType;
 import com.example.eventlistener.model.Wallet;
 import com.example.eventlistener.model.WalletLog;
 import java.math.BigDecimal;
 import java.util.List;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -83,43 +82,30 @@ public class WalletLogService {
 
   /**
    * log 를 저장한다.
-   * @param companyId 캠페인 아이디
-   * @param serviceId 서비스 아이디
-   * @param creditType 현금 or 포인트
-   * @param amount 금액
-   * @param description 설명
+   * @param dto {@link WalletLogCreationDto}
    */
   @Transactional
-  public void createWalletLog(
-      @NonNull Long companyId,
-      Long serviceId,
-      ServiceType serviceType,
-      @NonNull ProcessType processType,
-      @NonNull CreditType creditType,
-      @NonNull BigDecimal amount,
-      BigDecimal unitPrice,
-      String description
-  ) {
+  public void createWalletLog(WalletLogCreationDto dto) {
 
 
     final Wallet wallet =
-        walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
+        walletRepository.findWalletByCompanyIdOrElseThrow(dto.getCompanyId());
 
     // add log.
     WalletLog walletLog =
         WalletLog.builder()
             .wallet(wallet)
-            .processType(processType)
-            .creditType(creditType)
-            .amount(amount)
-            .description(description)
+            .processType(dto.getProcessType())
+            .creditType(dto.getCreditType())
+            .amount(dto.getAmount())
+            .description(dto.getDescription())
             .build();
 
-    if (serviceId != null && processType.equals(ProcessType.USED)) {
+    if (dto.getServiceId() != null && dto.getProcessType().equals(ProcessType.USED)) {
       walletLog.appendUsedLog(
-          serviceId,
-          serviceType,
-          unitPrice
+          dto.getServiceId(),
+          dto.getServiceType(),
+          dto.getUnitPrice()
       );
     }
 
