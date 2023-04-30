@@ -13,12 +13,11 @@ import com.example.eventlistener.dao.WalletLogRepository;
 import com.example.eventlistener.dao.WalletRepository;
 import com.example.eventlistener.dto.WalletLogCreationDto;
 import com.example.eventlistener.dto.WalletLogDto;
+import com.example.eventlistener.dto.WalletLogModifyDto;
 import com.example.eventlistener.dto.response.WalletLogResponse;
-import com.example.eventlistener.model.CreditType;
 import com.example.eventlistener.model.ProcessType;
 import com.example.eventlistener.model.Wallet;
 import com.example.eventlistener.model.WalletLog;
-import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -114,32 +113,25 @@ public class WalletLogService {
 
   /**
    * wallet log 를 수정한다.
-   * @param companyId 회사 아이디.
-   * @param walletLogId 로그 아이디.
-   * @param processType 사용 | 충전 | 환불
-   * @param creditType 현금 | 포인트
-   * @param amount 금액
-   * @param description 설명
+   * @param dto {@link WalletLogModifyDto}
    */
   @Transactional
-  public void modifyWalletLog(
-      Long companyId,
-      Long walletLogId,
-      ProcessType processType,
-      CreditType creditType,
-      BigDecimal amount,
-      String description
-  ) {
+  public void modifyWalletLog(WalletLogModifyDto dto) {
 
-    final Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(companyId);
+    final Wallet wallet = walletRepository.findWalletByCompanyIdOrElseThrow(dto.getCompanyId());
 
     WalletLog walletLog = wallet.getWalletLogs()
         .stream()
-        .filter(wl -> wl.getId().equals(walletLogId))
+        .filter(wl -> wl.getId().equals(dto.getWalletLogId()))
         .findAny()
         .get();
 
-    walletLog.modifyWalletLog(processType, creditType, amount, description);
+    walletLog.modifyWalletLog(
+        dto.getProcessType(),
+        dto.getCreditType(),
+        dto.getAmount(),
+        dto.getDescription()
+    );
   }
 
 }

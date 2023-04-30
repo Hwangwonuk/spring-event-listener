@@ -86,15 +86,7 @@ public class WalletLogApi {
    */
   @PutMapping
   public void modifyWalletLog(@Valid @RequestBody WalletLogModifyRequest request) {
-    WalletLogModifyDto dto = WalletLogModifyDto.from(request);
-    walletLogService.modifyWalletLog(
-        dto.getCompanyId(),
-        dto.getWalletLogId(),
-        dto.getProcessType(),
-        dto.getCreditType(),
-        dto.getAmount(),
-        dto.getDescription()
-    );
+    walletLogService.modifyWalletLog(WalletLogModifyDto.from(request));
   }
 
 }
