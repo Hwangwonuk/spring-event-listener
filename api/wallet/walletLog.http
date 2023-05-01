@@ -8,6 +8,21 @@ Content-Type: application/json
 
 {
   "company_id": 1,
-  "service_id": 100000,
-  "credit" : 50000
+  "service_id": 1,
+  "process_type" : "CHARGE",
+  "credit_type": "CASH",
+  "amount": 100000,
+  "unit_price": 100000,
+  "description": "관리자 현금 충전"
+
+}
+
+### walletLog 수정
+PUT http://localhost:8080/v1/wallet_log
+Content-Type: application/json
+
+{
+  "company_id": 1,
+  "wallet_log_id": 1,
+  "description": "description 수정 내용"
 }
