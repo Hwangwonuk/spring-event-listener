@@ -54,7 +54,7 @@ public class WalletCreationRequest {
    */
   @NotNull
   @Digits(integer = 18, fraction = 2, message = "the point of cash field can not over 999,999,999 billion")
-  @JsonProperty("cash")
+  @JsonProperty("amount")
   private BigDecimal amount;
 
 }
